@@ -2,6 +2,9 @@ from rest_framework import generics
 from rest_framework.response import Response
 from .models import Quiz, Question, Option
 from .serializers import QuizSerializer, QuestionSerializer, OptionSerializer
+from django.shortcuts import render
+
+
 
 class QuizListCreate(generics.ListCreateAPIView):
     queryset = Quiz.objects.all()
@@ -25,3 +28,11 @@ class CreateQuestion(generics.CreateAPIView):
             Option.objects.create(question=question, **option_data)
 
         return Response({'status': 'success', 'question_id': question.id})
+    
+class OptionListCreate(generics.ListCreateAPIView):
+    queryset = Option.objects.all()
+    serializer_class = OptionSerializer
+
+
+
+

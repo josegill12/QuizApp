@@ -18,6 +18,7 @@ from django.contrib import admin
 from django.urls import path, include
 
 urlpatterns = [
+    # path('', include(('quiz_app.urls', 'quiz_app'), namespace='quiz_app')),
     path('admin/', admin.site.urls),
     path('api/', include('quiz_app.urls')),
 ]

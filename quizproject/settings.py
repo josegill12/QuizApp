@@ -62,6 +62,10 @@ ROOT_URLCONF = 'quizproject.urls'
 
 CORS_ALLOW_ALL_ORIGINS = True
 
+CORS_ALLOWED_ORIGINS = [
+    "https://quiz-app-frontend.onrender.com",
+    "http://localhost:3000",
+]
 
 TEMPLATES = [
     {

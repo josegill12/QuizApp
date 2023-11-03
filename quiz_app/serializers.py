@@ -1,11 +1,10 @@
-from .models import Quiz, Question, Option
-from django.contrib.auth.models import User
 from rest_framework import serializers
+from .models import Quiz, Question, Option
 
 
-class OptionSerializer(serializers.HyperlinkedModelSerializer):
+class OptionSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Quiz
+        model = Option
         fields = ['id', 'text', 'is_correct']
 
 class QuestionSerializer(serializers.ModelSerializer):
@@ -20,4 +19,6 @@ class QuizSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Quiz
-        fields = ['questions']
+        fields = ['id', 'title', 'questions']
+
+
