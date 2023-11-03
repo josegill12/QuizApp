@@ -20,5 +20,7 @@ from django.urls import path, include
 urlpatterns = [
     # path('', include(('quiz_app.urls', 'quiz_app'), namespace='quiz_app')),
     path('admin/', admin.site.urls),
-    path('api/', include('quiz_app.urls')),
+    # path('api/', include('quiz_app.urls')),
+    path('api-auth', include('rest_framework.urls', namespace='rest_framework')),
+    path('', include('users.urls')),
 ]
