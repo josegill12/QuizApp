@@ -94,7 +94,7 @@ WSGI_APPLICATION = 'quizproject.wsgi.application'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 DATABASES = {
-    'default': dj_database_url.config(default='postgres://josegill12:RjaAEo6IuNC3@ep-lingering-resonance-82424148-pooler.us-east-2.aws.neon.tech/Quiz%20App',
+    'default': dj_database_url.config(default='postgres://josegill12:RjaAEo6IuNC3@ep-lingering-resonance-82424148-pooler.us-east-2.aws.neon.tech/test',
         conn_max_age=600,
         conn_health_checks=True,
     ),
