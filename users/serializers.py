@@ -6,3 +6,8 @@ class UserCreateSerializer(UserCreateSerializer):
     class Meta(UserCreateSerializer.Meta):
         model = models.User
         fields = ('id', 'email', 'username', 'password', 'avatar')
+
+class UserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.User
+        fields = ('__all__')
