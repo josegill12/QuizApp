@@ -2,8 +2,10 @@ from django.shortcuts import render
 from rest_framework import generics
 from .models import User
 from .serializers import UserSerializer
-
+from rest_framework.authtoken.models import Token
+from rest_framework.authtoken.views import ObtainAuthToken
 from rest_framework.response import Response
+from rest_framework.authtoken.serializers import AuthTokenSerializer
 
 class UserList(generics.ListCreateAPIView):
    queryset = User.objects.all()
@@ -42,3 +44,31 @@ class UserDetail(generics.RetrieveUpdateDestroyAPIView):
        instance = await self.get_object()
        await instance.delete()
        return Response(status=204)
+   
+class CreateTokenView(ObtainAuthToken):
+    
+
+    """Views for authorizations"""
+
+    serializer_class = AuthTokenSerializer
+    # renderer_classes = api_settings.DEFAULT_RENDERER_CLASSES
+
+    def post(self, request, *args, **kwargs):
+        serializer = self.serializer_class(data=request.data,
+                                           context={'request': request})
+        serializer.is_valid(raise_exception=True)
+        user = serializer.validated_data['user']
+        serializedUser = UserSerializer(user)
+        token, created = Token.objects.get_or_create(user=user)
+
+        return Response({
+            'token': token.key,
+            'user_id': user.pk,
+            'email': user.email,
+            'first_name': user.first_name,
+            'last_name': user.last_name,
+            'location': user.location,
+            'pitch': user.pitch,
+            'tags': serializedUser.data.get('tags'),
+            'profile_image': serializedUser.data.get('profile_image'),
+        })
